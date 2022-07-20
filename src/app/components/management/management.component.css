@@ -1,0 +1,16 @@
+.title-container,
+.button-container {
+  width: 200px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+button,
+p {
+  width: 100%;
+}
+
+table {
+  width: 700px;
+  margin: 0 auto;
+}

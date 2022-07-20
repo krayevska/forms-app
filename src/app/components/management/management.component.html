@@ -1,0 +1,48 @@
+<div class="title-container">
+  <p class="title">QUESTIONS LIST</p>
+</div>
+
+<div class="button-container">
+  <button mat-raised-button (click)="createQuestion()">
+    CREATE A NEW QUESTION
+  </button>
+</div>
+<ng-container *ngIf="questions">
+  <table mat-table [dataSource]="questions" class="mat-elevation-z8">
+    <ng-container matColumnDef="text">
+      <th mat-header-cell *matHeaderCellDef>TEXT</th>
+      <td mat-cell *matCellDef="let question">{{ question.text }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>TYPE</th>
+      <td mat-cell *matCellDef="let question">{{ question.type }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="creationDate">
+      <th mat-header-cell *matHeaderCellDef>DATE</th>
+      <td mat-cell *matCellDef="let question">{{ question.creationDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let question">
+        <div class="button-container">
+          <button (click)="editQuestion(question)">EDIT</button>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let question">
+        <div class="button-container">
+          <button (click)="deleteQuestion(question)">DELETE</button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</ng-container>
