@@ -29,10 +29,13 @@ export class ManagementComponent implements OnInit {
   }
 
   editQuestion(question: Question): void {
-    console.log(question);
+    console.log('EDIT ', question);
+    this.localstorageService.setQuestionForEdit(question);
+    this.router.navigate(['/edit']);
   }
 
   deleteQuestion(question: Question): void {
     console.log(question);
+    this.localstorageService.deleteQuestion(question);
   }
 }

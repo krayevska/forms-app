@@ -1,5 +1,10 @@
 <p class="title">Create a new question:</p>
-<form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="form">
+<form
+  [formGroup]="questionForm"
+  #formDirective="ngForm"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
   <div>
     <label id="textarea-label">Enter your question</label>
     <mat-form-field
@@ -31,8 +36,41 @@
     </mat-radio-group>
   </div>
 
-  <!-- <div *ngIf="answersChoice" [hidden]="!answersChoice" [ngClass]="{'hidden' : !answersChoice} "> -->
-  <div [ngClass]="{ hidden: isAnswerOpen }">
+  <div
+    *ngIf="!isAnswerOpen"
+    formArrayName="answers"
+    class="answer-options-section-wrapper"
+  >
+    <!-- <button
+      type="button"
+      class="button-wrapper"
+      mat-stroked-button
+      color="primary"
+      (click)="addAnswer()"
+    >
+      + Add another answer
+    </button> -->
+
+    <mat-form-field
+      MatFormFieldControl
+      *ngFor="let alias of answers.controls; let i = index"
+      class="answer-options-wrapper"
+    >
+      <label for="answer-{{ i }}">answer option {{ i + 1 }}:</label>
+      <input matInput id="answer-{{ i }}" type="text" [formControlName]="i" />
+    </mat-form-field>
+    <button
+      type="button"
+      class="button-wrapper"
+      mat-stroked-button
+      color="primary"
+      (click)="addAnswer()"
+    >
+      + Add another answer
+    </button>
+  </div>
+
+  <!-- <div [ngClass]="{ hidden: isAnswerOpen }">
     <label id="textarea-answers-label">Enter answers options</label>
     <mat-form-field
       class="textaria-wrapper wrapper"
@@ -47,14 +85,22 @@
         type="text"
       ></textarea>
     </mat-form-field>
-  </div>
+  </div> -->
 
   <div class="button-wrapper">
-    <button mat-raised-button type="submit" [disabled]="!questionForm.valid">
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!questionForm.valid"
+    >
       Submit
     </button>
   </div>
 
-  <!-- <label for="last-name">Last Name: </label>
-  <input id="last-name" type="text" formControlName="type" /> -->
+  <div class="button-wrapper">
+    <button mat-stroked-button color="primary" (click)="goToQuestions()">
+      Go to Questions
+    </button>
+  </div>
 </form>
