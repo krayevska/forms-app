@@ -1,21 +1,60 @@
-<p>create works!</p>
+<p class="title">Create a new question:</p>
+<form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="form">
+  <div>
+    <label id="textarea-label">Enter your question</label>
+    <mat-form-field
+      class="textaria-wrapper wrapper"
+      appearance="fill"
+      aria-labelledby="textarea-label"
+    >
+      <mat-label>Text of question</mat-label>
+      <textarea
+        matInput
+        formControlName="text"
+        id="text"
+        type="text"
+      ></textarea>
+    </mat-form-field>
+  </div>
 
-<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-  <!-- <label for="first-name">First Name: </label>
-    <input id="first-name" type="text" formControlName="text"> -->
+  <div>
+    <label id="radio-group-label">Pick type of an answer</label>
+    <mat-radio-group
+      aria-labelledby="radio-group-label"
+      formControlName="type"
+      class="radio-buttons-wrapper wrapper"
+      (change)="onChange($event)"
+    >
+      <mat-radio-button value="single">single choice</mat-radio-button>
+      <mat-radio-button value="multi">multiple choice</mat-radio-button>
+      <mat-radio-button value="open">open</mat-radio-button>
+    </mat-radio-group>
+  </div>
 
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Question</mat-label>
-    <textarea matInput formControlName="text" id="text" type="text"></textarea>
-  </mat-form-field>
+  <!-- <div *ngIf="answersChoice" [hidden]="!answersChoice" [ngClass]="{'hidden' : !answersChoice} "> -->
+  <div [ngClass]="{ hidden: isAnswerOpen }">
+    <label id="textarea-answers-label">Enter answers options</label>
+    <mat-form-field
+      class="textaria-wrapper wrapper"
+      appearance="fill"
+      aria-labelledby="textarea-answers-label"
+    >
+      <mat-label>separate options by comma</mat-label>
+      <textarea
+        matInput
+        formControlName="answers"
+        id="answers"
+        type="text"
+      ></textarea>
+    </mat-form-field>
+  </div>
 
-  <mat-radio-group aria-label="Select question type" formControlName="type">
-    <mat-radio-button value="single">single</mat-radio-button>
-    <mat-radio-button value="multi">multi</mat-radio-button>
-    <mat-radio-button value="open">open</mat-radio-button>
-  </mat-radio-group>
-  <p>Complete the form to enable button.</p>
-  <button type="submit" [disabled]="!createForm.valid">Submit</button>
+  <div class="button-wrapper">
+    <button mat-raised-button type="submit" [disabled]="!questionForm.valid">
+      Submit
+    </button>
+  </div>
+
   <!-- <label for="last-name">Last Name: </label>
   <input id="last-name" type="text" formControlName="type" /> -->
 </form>

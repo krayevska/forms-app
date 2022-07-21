@@ -18,11 +18,11 @@ export class LocalStorageService {
     if (data) {
       questions = JSON.parse(data);
       questions.push(question);
-      //localStorage.setItem('questions', JSON.stringify(questions));
+      localStorage.setItem('questions', JSON.stringify(questions));
     } else {
       questions = [question];
-      //localStorage.setItem('questions', JSON.stringify(questions));
+      localStorage.setItem('questions', JSON.stringify(questions));
     }
-    localStorage.setItem('questions', JSON.stringify(questions));
+    //localStorage.setItem('questions', JSON.stringify(questions));
   }
 }

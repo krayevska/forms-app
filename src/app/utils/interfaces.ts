@@ -1,7 +1,7 @@
 export interface Question {
-  text: string;
-  type: 'single' | 'multi' | 'open';
+  text: string | null | undefined;
+  type: string | null | undefined;
   creationDate: Date;
-  answer: string;
-  answerDate: Date;
+  answerOptions: string[] | [];
+  answerDate: Date | null;
 }

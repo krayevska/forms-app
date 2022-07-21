@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Question } from 'src/app/utils/interfaces';
 import { DISPLAYED_COLUMNS } from '../../utils/constants';
