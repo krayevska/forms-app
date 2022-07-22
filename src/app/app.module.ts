@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 import {
   MatRadioModule,
   MAT_RADIO_DEFAULT_OPTIONS,
@@ -18,6 +19,7 @@ import { ManagementComponent } from './components/management/management.componen
 import { EditComponent } from './components/edit/edit.component';
 import { CreateComponent } from './components/create/create.component';
 import { DisplayComponent } from './components/display/display.component';
+import { AnswerFormComponent } from './components/answer-form/answer-form.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { DisplayComponent } from './components/display/display.component';
     EditComponent,
     CreateComponent,
     DisplayComponent,
+    AnswerFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { DisplayComponent } from './components/display/display.component';
     BrowserAnimationsModule,
     MatIconModule,
     MatFormFieldModule,
+    MatCardModule,
   ],
   providers: [
     {

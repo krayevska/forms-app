@@ -1,19 +1,19 @@
 .title-container,
 .button-container {
   width: 170px;
-  margin: 50px auto;
+  margin: 0 auto;
+  padding: 10px;
   text-align: center;
 }
 
-button,
-p {
-  width: 100%;
-  font-size: 12px;
+.title-container {
+  font-size: 20px;
+  padding-top: 40px;
 }
 
-table {
-  width: 700px;
-  margin: 0 auto;
+button {
+  width: 100%;
+  font-size: 12px;
 }
 
 table {

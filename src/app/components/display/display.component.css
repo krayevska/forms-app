@@ -1,0 +1,48 @@
+.main-wrapper {
+  background-color: #d5daf6;
+}
+
+.display-wrapper {
+  /* background-color: #e2e6fc; */
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.unanswered-wrapper,
+.answered-wrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.radio-buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.subtitle {
+  text-align: center;
+  padding: 20px 0;
+  font-weight: bold;
+}
+
+.button-wrapper {
+  width: 170px;
+  margin: 0 auto;
+  padding-top: 50px;
+  text-align: center;
+}
+
+mat-card {
+  width: 400px;
+  margin: 0 auto;
+}

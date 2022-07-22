@@ -1,1 +1,43 @@
-<p>display works!</p>
+<div class="main-wrapper">
+  <div class="button-wrapper">
+    <button mat-raised-button color="primary" (click)="goToQuestions()">
+      Go to Questions
+    </button>
+  </div>
+
+  <div class="display-wrapper">
+    <div class="unanswered-wrapper">
+      <p class="subtitle">unanswered questions</p>
+      <mat-card
+        *ngFor="let question of unansweredQuestions"
+        class="unanswerd-cards"
+      >
+        <mat-card-content>
+          <p>Question:{{ question.text }}</p>
+          <app-answer-form [question]="question"></app-answer-form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="answered-wrapper">
+      <p class="subtitle">answered questions</p>
+      <mat-card
+        *ngFor="let question of answeredQuestions"
+        class="answerd-cards"
+      >
+        <mat-card-content>
+          <p>Question: {{ question.text }}</p>
+          <p>Answer: {{ question.answer || question.answerOpen }}</p>
+        </mat-card-content>
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="makeUnanswered(question)"
+          >
+            Make unanswered
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

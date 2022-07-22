@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Question } from '../utils/interfaces';
+import { Question, Answer } from '../utils/interfaces';
+import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
   constructor() {}
+
+  private statusChanges = new BehaviorSubject('');
+  updateQuestionsDisplay = this.statusChanges.asObservable();
 
   getQuestions(): Question[] {
     let data = localStorage.getItem('questions');
@@ -42,6 +46,29 @@ export class LocalStorageService {
     allQuestions.splice(index, 1);
 
     localStorage.setItem('questions', JSON.stringify(allQuestions));
+  }
+
+  answerQuestion(question: Question, answer: Answer): void {
+    let allQuestions = this.getQuestions();
+    let key = question.creationDate;
+    let index = allQuestions.findIndex((q) => q.creationDate === key);
+    if (answer.open !== '') {
+      allQuestions[index].answerOpen = answer.open;
+    } else {
+      allQuestions[index].answer = answer.option;
+    }
+    localStorage.setItem('questions', JSON.stringify(allQuestions));
+    this.statusChanges.next(key);
+  }
+
+  makeUnanswered(question: Question): void {
+    let allQuestions = this.getQuestions();
+    let key = question.creationDate;
+    let index = allQuestions.findIndex((q) => q.creationDate === key);
+    allQuestions[index].answerOpen = undefined;
+    allQuestions[index].answer = undefined;
+    localStorage.setItem('questions', JSON.stringify(allQuestions));
+    this.statusChanges.next(key);
   }
 
   addQuestion(question: Question): void {

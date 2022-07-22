@@ -34,6 +34,10 @@ export class ManagementComponent implements OnInit {
     this.router.navigate(['/edit']);
   }
 
+  goToDisplay(): void {
+    this.router.navigate(['/display']);
+  }
+
   deleteQuestion(question: Question): void {
     console.log(question);
     this.localstorageService.deleteQuestion(question);

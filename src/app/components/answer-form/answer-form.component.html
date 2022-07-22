@@ -1,0 +1,42 @@
+<form
+  *ngIf="answersForm"
+  [formGroup]="answersForm"
+  #formDirective="ngForm"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <mat-form-field
+    *ngIf="openAnswer"
+    class="textaria-wrapper wrapper"
+    appearance="fill"
+    aria-labelledby="textarea-label"
+  >
+    <mat-label>Your answer</mat-label>
+    <textarea matInput formControlName="open" id="text" type="text"></textarea>
+  </mat-form-field>
+
+  <div *ngIf="!openAnswer">
+    <label id="radio-group-label" class="sub-title">Choose your answer</label>
+    <mat-radio-group
+      aria-labelledby="radio-group-label"
+      formControlName="option"
+      class="radio-buttons-wrapper wrapper"
+    >
+      <mat-radio-button
+        *ngFor="let option of answerOptions"
+        value="{{ option }}"
+        >{{ option }}</mat-radio-button
+      >
+    </mat-radio-group>
+  </div>
+  <div class="button-wrapper">
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!answersForm.valid || isSubmitted"
+    >
+      Save answer
+    </button>
+  </div>
+</form>

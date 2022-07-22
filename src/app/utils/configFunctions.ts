@@ -7,8 +7,9 @@ export function setQuestion(questionForm: any): Question {
     type: questionForm.type,
     creationDate: new Date(Date.now()).toLocaleString(),
     answerOptions: questionForm.answers,
-    answerOpen: null,
-    answerDate: null,
+    answer: undefined,
+    answerOpen: undefined,
+    answerDate: undefined,
   };
   return currentQuestion;
 }
@@ -26,8 +27,6 @@ export function updateValidation(
   answers: FormArray<any>
 ): void {
   if (isAnswerOpen) {
-    debugger;
-    console.log('this.answers CONGIF', answers.controls);
     answers.clearValidators();
     answers.updateValueAndValidity();
     answers.controls.forEach((c) => {
@@ -37,7 +36,6 @@ export function updateValidation(
       c.updateValueAndValidity();
     });
   } else {
-    debugger;
     answers.setValidators(minLengthArray(3));
     answers.updateValueAndValidity();
     answers.controls.forEach((c) => {
