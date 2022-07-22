@@ -53,3 +53,7 @@ textarea {
 .answer-options-wrapper {
   width: 100%;
 }
+
+.sub-title {
+  text-decoration: underline;
+}

@@ -50,6 +50,14 @@
     >
       <label for="answer-{{ i }}">answer option {{ i + 1 }}:</label>
       <input matInput id="answer-{{ i }}" type="text" [formControlName]="i" />
+      <button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="removeAnswer(i)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
     </mat-form-field>
     <button
       type="button"

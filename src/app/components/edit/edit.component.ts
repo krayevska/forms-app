@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -10,6 +11,7 @@ import { MatRadioChange } from '@angular/material/radio';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Question } from 'src/app/utils/interfaces';
+import { editQuestion, updateValidation } from '../../utils/configFunctions';
 
 @Component({
   selector: 'app-edit',
@@ -20,6 +22,7 @@ export class EditComponent implements OnInit {
   public questionForm?: FormGroup;
   public question?: Question;
   public isAnswerOpen?: boolean;
+  public updateValidation = updateValidation;
 
   constructor(
     private fb: FormBuilder,
@@ -69,20 +72,24 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('FORM VALUE ', this.questionForm?.value);
+    let editedQ: Question;
     if (this.question) {
-      this.question.text = this.questionForm?.value.text;
-      this.question.type = this.questionForm?.value.type;
-      this.question.answerOptions = this.questionForm?.value.answers;
+      editedQ = editQuestion(this.questionForm?.value, this.question);
       this.localStorageService.editQuestion(this.question);
     }
+    this.goToQuestions();
   }
 
   onChange(e: MatRadioChange): void {
-    console.log('EVENT ', e);
+    this.isAnswerOpen = e.value === 'open';
+    this.updateValidation(this.isAnswerOpen, this.answers);
   }
 
-  addAnswer(): void {
-    console.log('ADD ANSWER');
+  addAnswer() {
+    this.answers.push(this.fb.control('', [Validators.required]));
+  }
+
+  removeAnswer(i: number): void {
+    this.answers.removeAt(i);
   }
 }

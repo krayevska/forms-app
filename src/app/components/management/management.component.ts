@@ -37,5 +37,6 @@ export class ManagementComponent implements OnInit {
   deleteQuestion(question: Question): void {
     console.log(question);
     this.localstorageService.deleteQuestion(question);
+    this.questions = this.localstorageService.getQuestions();
   }
 }

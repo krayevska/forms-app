@@ -53,3 +53,13 @@ textarea {
 .answer-options-wrapper {
   width: 100%;
 }
+
+div.mat-form-feild {
+  padding: 0;
+  margin: 0;
+}
+
+div.mat-form-feild-wrapper {
+  padding: 0;
+  margin: 0;
+}
