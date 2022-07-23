@@ -5,9 +5,15 @@ export interface Question {
   type: string | null | undefined;
   creationDate: string;
   answerOptions: string[] | undefined;
-  answer: string | undefined;
-  answerOpen: string | undefined;
-  answerDate: Date | undefined;
+  answer: {
+    answered: boolean;
+    open: string | undefined;
+    single: string | undefined;
+    multi: string[] | undefined;
+  };
+  // answer: string | undefined;
+  // answerOpen: string | undefined;
+  // answerDate: Date | undefined;
 }
 
 export interface Answer {

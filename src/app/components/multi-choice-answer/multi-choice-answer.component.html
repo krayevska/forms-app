@@ -1,0 +1,29 @@
+<div *ngIf="form && options">
+  <form class="example-section" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div formArrayName="checkboxes">
+      <p>Choose your answer</p>
+
+      <div *ngFor="let option of options">
+        <label>
+          <input
+            type="checkbox"
+            [formControlName]="option"
+            [value]="option"
+            (change)="onChangeAnswer($event)"
+          />
+          {{ option }}
+        </label>
+      </div>
+    </div>
+    <div class="button-wrapper">
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        [disabled]="disableSubmit()"
+      >
+        Save answer
+      </button>
+    </div>
+  </form>
+</div>

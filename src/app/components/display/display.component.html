@@ -14,7 +14,14 @@
       >
         <mat-card-content>
           <p>Question:{{ question.text }}</p>
-          <app-answer-form [question]="question"></app-answer-form>
+          <div *ngIf="typeIsMulti(question)">
+            <app-multi-choice-answer
+              [question]="question"
+            ></app-multi-choice-answer>
+          </div>
+          <div *ngIf="!typeIsMulti(question)">
+            <app-answer-form [question]="question"></app-answer-form>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>
@@ -26,7 +33,14 @@
       >
         <mat-card-content>
           <p>Question: {{ question.text }}</p>
-          <p>Answer: {{ question.answer || question.answerOpen }}</p>
+          <p>
+            Answer:
+            {{
+              question.answer.open ||
+                question.answer.single ||
+                question.answer.multi
+            }}
+          </p>
         </mat-card-content>
         <div>
           <button

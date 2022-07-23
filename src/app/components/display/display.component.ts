@@ -50,15 +50,14 @@ export class DisplayComponent implements OnInit {
     let questions = this.localStorageService.getQuestions();
     console.log('questions ', questions);
     this.unansweredQuestions = questions.filter(
-      (question) =>
-        (question.answerOpen === undefined || question.answerOpen === null) &&
-        question.answer === undefined
+      (question) => question.answer.answered === false
     );
 
     this.answeredQuestions = questions.filter(
-      (question) =>
-        question.answerOpen !== undefined || question.answer !== undefined
+      (question) => question.answer.answered === true
     );
+    console.log('this.unansweredQuestions ', this.unansweredQuestions);
+    console.log('this.answeredQuestions ', this.answeredQuestions);
   }
 
   goToQuestions(): void {
@@ -71,5 +70,9 @@ export class DisplayComponent implements OnInit {
 
   makeUnanswered(question: Question): void {
     this.localStorageService.makeUnanswered(question);
+  }
+
+  typeIsMulti(q: Question): boolean {
+    return q.type === 'multi';
   }
 }

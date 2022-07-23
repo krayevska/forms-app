@@ -48,15 +48,33 @@ export class LocalStorageService {
     localStorage.setItem('questions', JSON.stringify(allQuestions));
   }
 
-  answerQuestion(question: Question, answer: Answer): void {
+  // answer: {
+  //   answerd: false,
+  //   open: undefined,
+  //   single: undefined,
+  //   multi: undefined,
+  // },
+
+  answerQuestion(question: Question, answer: any | any[]): void {
+    debugger;
     let allQuestions = this.getQuestions();
     let key = question.creationDate;
     let index = allQuestions.findIndex((q) => q.creationDate === key);
-    if (answer.open !== '') {
-      allQuestions[index].answerOpen = answer.open;
+    allQuestions[index].answer.answered = true;
+    console.log('allQuestions[index] B ', allQuestions[index]);
+    if (question.type === 'open') {
+      allQuestions[index].answer.open = answer.open;
+    } else if (question.type === 'single') {
+      allQuestions[index].answer.single = answer.option;
     } else {
-      allQuestions[index].answer = answer.option;
+      debugger;
+      let answers = Object.keys(answer);
+      debugger;
+      allQuestions[index].answer.multi = answers.filter(
+        (option: any) => answer[option] === true
+      );
     }
+    console.log('allQuestions[index] A ', allQuestions[index]);
     localStorage.setItem('questions', JSON.stringify(allQuestions));
     this.statusChanges.next(key);
   }
@@ -65,8 +83,10 @@ export class LocalStorageService {
     let allQuestions = this.getQuestions();
     let key = question.creationDate;
     let index = allQuestions.findIndex((q) => q.creationDate === key);
-    allQuestions[index].answerOpen = undefined;
-    allQuestions[index].answer = undefined;
+    allQuestions[index].answer.answered = false;
+    allQuestions[index].answer.open = undefined;
+    allQuestions[index].answer.single = undefined;
+    allQuestions[index].answer.multi = undefined;
     localStorage.setItem('questions', JSON.stringify(allQuestions));
     this.statusChanges.next(key);
   }

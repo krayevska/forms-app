@@ -1,5 +1,7 @@
 .main-wrapper {
   background-color: #d5daf6;
+  width: 100vw;
+  height: 100vw;
 }
 
 .display-wrapper {

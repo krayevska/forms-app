@@ -7,9 +7,12 @@ export function setQuestion(questionForm: any): Question {
     type: questionForm.type,
     creationDate: new Date(Date.now()).toLocaleString(),
     answerOptions: questionForm.answers,
-    answer: undefined,
-    answerOpen: undefined,
-    answerDate: undefined,
+    answer: {
+      answered: false,
+      open: undefined,
+      single: undefined,
+      multi: undefined,
+    },
   };
   return currentQuestion;
 }
