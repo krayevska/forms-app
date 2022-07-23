@@ -60,7 +60,6 @@ export class EditComponent implements OnInit {
       type: [question.type, Validators.required],
       answers: this.fb.array(answersControls),
     });
-    console.log('this.questionForm ', this.questionForm);
   }
 
   get answers() {

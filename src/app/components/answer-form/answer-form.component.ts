@@ -27,7 +27,6 @@ export class AnswerFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('question ', this.question);
     this.openAnswer = this.question?.type === 'open';
     if (!this.openAnswer) {
       this.answerOptions = this.question?.answerOptions;
@@ -51,7 +50,6 @@ export class AnswerFormComponent implements OnInit {
   updateValidation(answerType: string): void {
     let optionsControl = this.answersForm?.get('option');
     let openAnswerControl = this.answersForm?.get('open');
-    console.log('optionsControl ', optionsControl);
     if (answerType === 'open') {
       optionsControl?.clearValidators();
       optionsControl?.updateValueAndValidity();
@@ -64,7 +62,6 @@ export class AnswerFormComponent implements OnInit {
 
   onSubmit(): void {
     this.isSubmitted = true;
-    console.log(this.answersForm?.value);
     if (this.question) {
       this.localStorageService.answerQuestion(
         this.question,

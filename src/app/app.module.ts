@@ -23,6 +23,7 @@ import { DisplayComponent } from './components/display/display.component';
 import { AnswerFormComponent } from './components/answer-form/answer-form.component';
 import { MultiChoiceAnswerComponent } from './components/multi-choice-answer/multi-choice-answer.component';
 import { SingleChoiseAnswerComponent } from './components/single-choise-answer/single-choise-answer.component';
+import { OpenAnswerComponent } from './components/open-answer/open-answer.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SingleChoiseAnswerComponent } from './components/single-choise-answer/s
     AnswerFormComponent,
     MultiChoiceAnswerComponent,
     SingleChoiseAnswerComponent,
+    OpenAnswerComponent,
   ],
   imports: [
     BrowserModule,

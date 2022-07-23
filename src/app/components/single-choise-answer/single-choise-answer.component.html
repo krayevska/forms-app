@@ -1,1 +1,24 @@
-<p>single-choise-answer works!</p>
+<p>SINGLE!</p>
+
+<form *ngIf="answersForm" [formGroup]="answersForm" (ngSubmit)="onSubmit()">
+  <label id="radio-group-label" class="sub-title">Choose your answer S:</label>
+  <mat-radio-group
+    aria-labelledby="radio-group-label"
+    formControlName="options"
+    class="radio-buttons-wrapper wrapper"
+  >
+    <mat-radio-button *ngFor="let option of options" value="{{ option }}">{{
+      option
+    }}</mat-radio-button>
+  </mat-radio-group>
+  <div class="button-wrapper">
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!answersForm.valid"
+    >
+      Save answer
+    </button>
+  </div>
+</form>

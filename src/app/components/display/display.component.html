@@ -19,8 +19,16 @@
               [question]="question"
             ></app-multi-choice-answer>
           </div>
-          <div *ngIf="!typeIsMulti(question)">
+          <div *ngIf="typeIsOpen(question)">
+            <app-open-answer [question]="question"></app-open-answer>
+          </div>
+          <!-- <div *ngIf="!typeIsMulti(question)">
             <app-answer-form [question]="question"></app-answer-form>
+          </div> -->
+          <div *ngIf="typeIsSingle(question)">
+            <app-single-choise-answer
+              [question]="question"
+            ></app-single-choise-answer>
           </div>
         </mat-card-content>
       </mat-card>

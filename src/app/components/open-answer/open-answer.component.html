@@ -1,1 +1,27 @@
 <p>open-answer works!</p>
+
+<form *ngIf="answerForm" [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+  <mat-form-field
+    class="textaria-wrapper wrapper"
+    appearance="fill"
+    aria-labelledby="textarea-label"
+  >
+    <mat-label>Your answer</mat-label>
+    <textarea
+      matInput
+      formControlName="answer"
+      id="text"
+      type="text"
+    ></textarea>
+  </mat-form-field>
+  <div class="button-wrapper">
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!answerForm.valid"
+    >
+      Save answer
+    </button>
+  </div>
+</form>

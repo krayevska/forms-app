@@ -27,20 +27,6 @@ export class DisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterQuestions();
-    // let questions = this.localStorageService.getQuestions();
-    // console.log('questions ', questions);
-    // this.unansweredQuestions = questions.filter(
-    //   (question) =>
-    //     (question.answerOpen === undefined || question.answerOpen === null) &&
-    //     question.answer === undefined
-    // );
-
-    // this.answeredQuestions = questions.filter(
-    //   (question) =>
-    //     question.answerOpen !== undefined || question.answer !== undefined
-    // );
-    // console.log('unansweredQuestions ', this.unansweredQuestions);
-    // console.log('answeredQuestions ', this.answeredQuestions);
     this.localStorageService.updateQuestionsDisplay.subscribe(() => {
       this.filterQuestions();
     });
@@ -48,7 +34,6 @@ export class DisplayComponent implements OnInit {
 
   filterQuestions(): void {
     let questions = this.localStorageService.getQuestions();
-    console.log('questions ', questions);
     this.unansweredQuestions = questions.filter(
       (question) => question.answer.answered === false
     );
@@ -56,16 +41,10 @@ export class DisplayComponent implements OnInit {
     this.answeredQuestions = questions.filter(
       (question) => question.answer.answered === true
     );
-    console.log('this.unansweredQuestions ', this.unansweredQuestions);
-    console.log('this.answeredQuestions ', this.answeredQuestions);
   }
 
   goToQuestions(): void {
     this.router.navigate(['']);
-  }
-
-  onSubmit(): void {
-    console.log(this.answersForm?.value);
   }
 
   makeUnanswered(question: Question): void {
@@ -74,5 +53,13 @@ export class DisplayComponent implements OnInit {
 
   typeIsMulti(q: Question): boolean {
     return q.type === 'multi';
+  }
+
+  typeIsSingle(q: Question): boolean {
+    return q.type === 'single';
+  }
+
+  typeIsOpen(q: Question): boolean {
+    return q.type === 'open';
   }
 }
