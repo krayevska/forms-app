@@ -13,7 +13,7 @@
         class="unanswerd-cards"
       >
         <mat-card-content>
-          <p>Question:{{ question.text }}</p>
+          <p><span class="sub-title">Question:</span> {{ question.text }}</p>
           <div *ngIf="typeIsMulti(question)">
             <app-multi-choice-answer
               [question]="question"
@@ -22,9 +22,6 @@
           <div *ngIf="typeIsOpen(question)">
             <app-open-answer [question]="question"></app-open-answer>
           </div>
-          <!-- <div *ngIf="!typeIsMulti(question)">
-            <app-answer-form [question]="question"></app-answer-form>
-          </div> -->
           <div *ngIf="typeIsSingle(question)">
             <app-single-choise-answer
               [question]="question"
@@ -49,6 +46,7 @@
                 question.answer.multi
             }}
           </p>
+          <p>Answer was added: {{ question.answer.date }}</p>
         </mat-card-content>
         <div>
           <button

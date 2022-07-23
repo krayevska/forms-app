@@ -1,7 +1,5 @@
-<p>SINGLE!</p>
-
 <form *ngIf="answersForm" [formGroup]="answersForm" (ngSubmit)="onSubmit()">
-  <label id="radio-group-label" class="sub-title">Choose your answer S:</label>
+  <label id="radio-group-label" class="sub-title">Choose your answer:</label>
   <mat-radio-group
     aria-labelledby="radio-group-label"
     formControlName="options"

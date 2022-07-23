@@ -10,6 +10,7 @@ export interface Question {
     open: string | undefined;
     single: string | undefined;
     multi: string[] | undefined;
+    date: string | undefined;
   };
   // answer: string | undefined;
   // answerOpen: string | undefined;

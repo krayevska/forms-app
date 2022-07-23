@@ -12,6 +12,7 @@ export function setQuestion(questionForm: any): Question {
       open: undefined,
       single: undefined,
       multi: undefined,
+      date: undefined,
     },
   };
   return currentQuestion;

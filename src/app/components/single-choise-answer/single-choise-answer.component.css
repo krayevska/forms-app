@@ -3,3 +3,7 @@
   flex-direction: column;
   gap: 3px;
 }
+
+.sub-title {
+  text-decoration: underline;
+}

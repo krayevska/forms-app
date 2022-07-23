@@ -48,3 +48,7 @@ mat-card {
   width: 400px;
   margin: 0 auto;
 }
+
+.sub-title {
+  text-decoration: underline;
+}

@@ -1,7 +1,7 @@
 <div *ngIf="form && options">
   <form class="example-section" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div formArrayName="checkboxes">
-      <p>Choose your answer</p>
+      <p class="sub-title">Choose min 2 answers</p>
 
       <div *ngFor="let option of options">
         <label>

@@ -65,6 +65,7 @@ export class LocalStorageService {
         (option: any) => answer[option] === true
       );
     }
+    allQuestions[index].answer.date = new Date(Date.now()).toLocaleString();
 
     localStorage.setItem('questions', JSON.stringify(allQuestions));
     this.statusChanges.next(key);
@@ -78,6 +79,7 @@ export class LocalStorageService {
     allQuestions[index].answer.open = undefined;
     allQuestions[index].answer.single = undefined;
     allQuestions[index].answer.multi = undefined;
+    allQuestions[index].answer.date = undefined;
     localStorage.setItem('questions', JSON.stringify(allQuestions));
     this.statusChanges.next(key);
   }
