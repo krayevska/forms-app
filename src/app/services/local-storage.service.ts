@@ -24,27 +24,20 @@ export class LocalStorageService {
     return localStorage.getItem('questionToEdit');
   }
 
-  editQuestion(question: Question): void {
-    console.log('SERVISE EDIT ', question);
+  updateQuestion(question: Question): void {
     let key = question.creationDate;
     let allQuestions = this.getQuestions();
     let index = allQuestions.findIndex((q) => q.creationDate === key);
-    console.log('allQuestions ', allQuestions);
-    console.log('index ', index);
     allQuestions[index] = question;
-    console.log('allQuestions after ', allQuestions);
     localStorage.setItem('questions', JSON.stringify(allQuestions));
+    localStorage.removeItem('questionToEdit');
   }
 
   deleteQuestion(question: Question): void {
-    console.log('DELETE ', question);
-
     let key = question.creationDate;
     let allQuestions = this.getQuestions();
     let index = allQuestions.findIndex((q) => q.creationDate === key);
-    console.log('INDEX ', index);
     allQuestions.splice(index, 1);
-
     localStorage.setItem('questions', JSON.stringify(allQuestions));
   }
 
@@ -60,13 +53,11 @@ export class LocalStorageService {
       allQuestions[index].answer.single = answer.options;
     } else {
       let answers = Object.keys(answer);
-
       allQuestions[index].answer.multi = answers.filter(
         (option: any) => answer[option] === true
       );
     }
     allQuestions[index].answer.date = new Date(Date.now()).toLocaleString();
-
     localStorage.setItem('questions', JSON.stringify(allQuestions));
     this.statusChanges.next(key);
   }
@@ -85,16 +76,8 @@ export class LocalStorageService {
   }
 
   addQuestion(question: Question): void {
-    let questions: Question[];
-    let data = localStorage.getItem('questions');
-    if (data) {
-      questions = JSON.parse(data);
-      questions.push(question);
-      localStorage.setItem('questions', JSON.stringify(questions));
-    } else {
-      questions = [question];
-      localStorage.setItem('questions', JSON.stringify(questions));
-    }
-    //localStorage.setItem('questions', JSON.stringify(questions));
+    let questions = this.getQuestions();
+    questions.push(question);
+    localStorage.setItem('questions', JSON.stringify(questions));
   }
 }

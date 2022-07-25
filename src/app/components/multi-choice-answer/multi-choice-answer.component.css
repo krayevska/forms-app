@@ -1,3 +1,14 @@
 .sub-title {
   text-decoration: underline;
 }
+
+.check-boxes-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 5px;
+}
+
+p {
+  margin: 0;
+}

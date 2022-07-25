@@ -22,6 +22,7 @@ export class MultiChoiceAnswerComponent implements OnInit {
   @Input() question?: Question;
   public options?: string[];
   public form?: FormGroup;
+
   public isSubmitted = false;
   public checks = 0;
 
@@ -42,7 +43,7 @@ export class MultiChoiceAnswerComponent implements OnInit {
   }
 
   onChangeAnswer(e: any): void {
-    this.checks = e.target.checked ? this.checks + 1 : this.checks - 1;
+    this.checks = e.checked ? this.checks + 1 : this.checks - 1;
   }
 
   disableSubmit(): boolean {

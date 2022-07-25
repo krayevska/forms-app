@@ -75,14 +75,14 @@
       mat-raised-button
       type="submit"
       color="primary"
-      [disabled]="!questionForm.valid"
+      [disabled]="!questionForm.valid || questionForm.pristine"
     >
       Submit
     </button>
   </div>
 
   <div class="button-wrapper">
-    <button mat-stroked-button color="primary" (click)="goToQuestions()">
+    <button mat-stroked-button color="primary" (click)="goToManagmentPage()">
       Go to Questions
     </button>
   </div>

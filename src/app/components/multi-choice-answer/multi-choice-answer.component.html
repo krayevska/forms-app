@@ -1,18 +1,16 @@
 <div *ngIf="form && options">
-  <form class="example-section" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form class="check-boxes-wrapper" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div formArrayName="checkboxes">
       <p class="sub-title">Choose min 2 answers</p>
-
-      <div *ngFor="let option of options">
-        <label>
-          <input
-            type="checkbox"
+      <div class="check-boxes-wrapper">
+        <div *ngFor="let option of options">
+          <mat-checkbox
             [formControlName]="option"
             [value]="option"
             (change)="onChangeAnswer($event)"
-          />
-          {{ option }}
-        </label>
+            >{{ option }}</mat-checkbox
+          >
+        </div>
       </div>
     </div>
     <div class="button-wrapper">

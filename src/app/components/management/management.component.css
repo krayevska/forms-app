@@ -7,6 +7,7 @@
 }
 
 .title-container {
+  width: 260px;
   font-size: 20px;
   padding-top: 40px;
 }
@@ -18,9 +19,16 @@ button {
 
 table {
   width: 100%;
+  margin-top: 30px;
 }
 
 td.mat-cell,
 th.mat-header-cell {
   text-align: center !important;
+}
+
+.buttons {
+  display: flex;
+  width: 500px;
+  margin: 0 auto;
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -23,6 +22,7 @@ export class EditComponent implements OnInit {
   public question?: Question;
   public isAnswerOpen?: boolean;
   public updateValidation = updateValidation;
+  public editQuestion = editQuestion;
 
   constructor(
     private fb: FormBuilder,
@@ -43,9 +43,8 @@ export class EditComponent implements OnInit {
 
   setForm(question: Question) {
     let answersControls: FormControl[] = [];
-    let currentAnswers = question.answerOptions;
-    currentAnswers?.forEach((option) => {
-      answersControls.push(this.fb.control(option, [Validators.required]));
+    question.answerOptions?.forEach((option) => {
+      answersControls.push(this.fb.control(option));
     });
 
     this.questionForm = this.fb.group({
@@ -66,17 +65,16 @@ export class EditComponent implements OnInit {
     return this.questionForm?.get('answers') as FormArray;
   }
 
-  goToQuestions(): void {
+  goToManagmentPage(): void {
     this.router.navigate(['']);
   }
 
   onSubmit(): void {
-    let editedQ: Question;
     if (this.question) {
-      editedQ = editQuestion(this.questionForm?.value, this.question);
-      this.localStorageService.editQuestion(this.question);
+      this.editQuestion(this.questionForm?.value, this.question);
+      this.localStorageService.updateQuestion(this.question);
     }
-    this.goToQuestions();
+    this.goToManagmentPage();
   }
 
   onChange(e: MatRadioChange): void {

@@ -1,22 +1,24 @@
 <div class="main-wrapper">
   <div class="title-container">
-    <p class="title">QUESTIONS</p>
+    <p class="title">Question Management Page</p>
+  </div>
+  <div class="buttons">
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="createQuestion()">
+        ADD A NEW QUESTION
+      </button>
+    </div>
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="goToDisplay()">
+        GO TO DISPLAY
+      </button>
+    </div>
   </div>
 
-  <div class="button-container">
-    <button mat-raised-button color="primary" (click)="createQuestion()">
-      ADD A NEW QUESTION
-    </button>
-  </div>
-  <div class="button-container">
-    <button mat-raised-button color="primary" (click)="goToDisplay()">
-      GO TO DISPLAY
-    </button>
-  </div>
   <ng-container *ngIf="questions">
     <table mat-table [dataSource]="questions" class="mat-elevation-z8">
       <ng-container matColumnDef="text">
-        <th mat-header-cell *matHeaderCellDef>TEXT</th>
+        <th mat-header-cell *matHeaderCellDef>QUESTIONT</th>
         <td mat-cell *matCellDef="let question">{{ question.text }}</td>
       </ng-container>
 
@@ -26,12 +28,12 @@
       </ng-container>
 
       <ng-container matColumnDef="creationDate">
-        <th mat-header-cell *matHeaderCellDef>DATE</th>
+        <th mat-header-cell *matHeaderCellDef>DATE OF CREATION</th>
         <td mat-cell *matCellDef="let question">{{ question.creationDate }}</td>
       </ng-container>
 
       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef>EDIT</th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let question">
           <div class="button-container">
             <button
@@ -46,7 +48,7 @@
       </ng-container>
 
       <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef>DELETE</th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let question">
           <div class="button-container">
             <button
