@@ -4,12 +4,9 @@
       <p class="sub-title">Choose min 2 answers</p>
       <div class="check-boxes-wrapper">
         <div *ngFor="let option of options">
-          <mat-checkbox
-            [formControlName]="option"
-            [value]="option"
-            (change)="onChangeAnswer($event)"
-            >{{ option }}</mat-checkbox
-          >
+          <mat-checkbox [formControlName]="option" [value]="option">{{
+            option
+          }}</mat-checkbox>
         </div>
       </div>
     </div>
@@ -18,7 +15,7 @@
         mat-raised-button
         type="submit"
         color="primary"
-        [disabled]="disableSubmit()"
+        [disabled]="form.invalid"
       >
         Save answer
       </button>
