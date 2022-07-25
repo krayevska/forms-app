@@ -24,14 +24,12 @@ export class ManagementComponent implements OnInit {
   }
 
   createQuestion(): void {
-    console.log('createQuestion');
-    this.router.navigate(['/create']);
+    this.router.navigate(['/question', 'create']);
   }
 
   editQuestion(question: Question): void {
-    console.log('EDIT ', question);
     this.localstorageService.setQuestionForEdit(question);
-    this.router.navigate(['/edit']);
+    this.router.navigate(['/question', 'edit']);
   }
 
   goToDisplay(): void {

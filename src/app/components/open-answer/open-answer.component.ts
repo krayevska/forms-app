@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Question } from 'src/app/utils/interfaces';
+import { TEXTAREA_VALIDATORS } from '../../utils/constants';
 
 @Component({
   selector: 'app-open-answer',
@@ -17,11 +18,7 @@ export class OpenAnswerComponent implements OnInit {
 
   ngOnInit(): void {
     this.answerForm = new FormGroup({
-      answer: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(100),
-        Validators.minLength(10),
-      ]),
+      answer: new FormControl('', TEXTAREA_VALIDATORS),
     });
   }
   onSubmit(): void {

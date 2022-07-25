@@ -1,0 +1,89 @@
+<p class="title" *ngIf="mode === 'edit'">Edit your question:</p>
+<p class="title" *ngIf="mode === 'create'">Create a new question:</p>
+<form
+  *ngIf="questionForm"
+  [formGroup]="questionForm"
+  #formDirective="ngForm"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <div>
+    <label id="textarea-label" class="sub-title">Enter your question</label>
+    <mat-form-field
+      class="textaria-wrapper wrapper"
+      appearance="fill"
+      aria-labelledby="textarea-label"
+    >
+      <mat-label>Text of question</mat-label>
+      <textarea
+        matInput
+        formControlName="text"
+        id="text"
+        type="text"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <label id="radio-group-label" class="sub-title"
+      >Pick type of an answer</label
+    >
+    <mat-radio-group
+      aria-labelledby="radio-group-label"
+      formControlName="type"
+      class="radio-buttons-wrapper wrapper"
+      (change)="onChange($event)"
+    >
+      <mat-radio-button value="single">single choice</mat-radio-button>
+      <mat-radio-button value="multi">multiple choice</mat-radio-button>
+      <mat-radio-button value="open">open</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div formArrayName="answers" class="answer-options-section-wrapper">
+    <p class="sub-title" *ngIf="!isAnswerOpen">Add 3 or more options</p>
+
+    <mat-form-field
+      MatFormFieldControl
+      *ngFor="let alias of answers.controls; let i = index"
+      class="answer-options-wrapper"
+    >
+      <label for="answer-{{ i }}">answer option {{ i + 1 }}:</label>
+      <input matInput id="answer-{{ i }}" type="text" [formControlName]="i" />
+      <button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="removeAnswer(i)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button
+      type="button"
+      class="button-wrapper"
+      mat-stroked-button
+      color="primary"
+      (click)="addAnswer()"
+    >
+      + Add another answer
+    </button>
+  </div>
+
+  <div class="button-wrapper">
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="!questionForm.valid"
+    >
+      Submit
+    </button>
+  </div>
+
+  <div class="button-wrapper">
+    <button mat-stroked-button color="primary" (click)="goToManagmentPage()">
+      Go to Questions
+    </button>
+  </div>
+</form>
