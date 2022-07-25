@@ -16,6 +16,7 @@ import { setQuestion, updateValidation } from '../../utils/configFunctions';
 export class CreateComponent implements OnInit {
   public isAnswerOpen = true;
   public updateValidation = updateValidation;
+  public numberOfOptions = 3;
 
   constructor(
     private fb: FormBuilder,
@@ -39,11 +40,7 @@ export class CreateComponent implements OnInit {
       ],
     ],
     type: ['', Validators.required],
-    answers: this.fb.array([
-      this.fb.control('', [Validators.required]),
-      this.fb.control('', [Validators.required]),
-      this.fb.control('', [Validators.required]),
-    ]),
+    answers: this.fb.array([]),
   });
 
   get answers() {
@@ -52,10 +49,12 @@ export class CreateComponent implements OnInit {
 
   addAnswer() {
     this.answers.push(this.fb.control('', [Validators.required]));
+    this.numberOfOptions++;
   }
 
   removeAnswer(i: number): void {
     this.answers.removeAt(i);
+    this.numberOfOptions--;
   }
 
   onSubmit(): void {
@@ -66,6 +65,12 @@ export class CreateComponent implements OnInit {
 
   onChange(e: MatRadioChange): void {
     this.isAnswerOpen = e.value === 'open';
-    this.updateValidation(this.isAnswerOpen, this.answers);
+    if (!this.isAnswerOpen && this.answers.controls.length === 0) {
+      [...Array(3)].forEach((i) => {
+        this.addAnswer();
+      });
+    } else if (this.isAnswerOpen) {
+      [...Array(this.numberOfOptions)].forEach((i) => this.removeAnswer(i));
+    }
   }
 }

@@ -38,12 +38,8 @@
     </mat-radio-group>
   </div>
 
-  <div
-    *ngIf="!isAnswerOpen"
-    formArrayName="answers"
-    class="answer-options-section-wrapper"
-  >
-    <p class="sub-title">Add 3 or more options</p>
+  <div formArrayName="answers" class="answer-options-section-wrapper">
+    <p class="sub-title" *ngIf="!isAnswerOpen">Add 3 or more options</p>
 
     <mat-form-field
       MatFormFieldControl
