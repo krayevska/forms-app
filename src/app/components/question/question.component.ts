@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { MatRadioChange } from '@angular/material/radio';
 import { Validators } from '@angular/forms';
@@ -9,20 +9,22 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { setQuestion, editQuestion } from '../../utils/configFunctions';
 import { Question } from 'src/app/utils/interfaces';
 import { TEXTAREA_VALIDATORS } from '../../utils/constants';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css'],
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements OnInit, OnDestroy {
   public isAnswerOpen = true;
   private editQuestion = editQuestion;
   private setQuestion = setQuestion;
-  private numberOfOptions = 3;
+  private numberOfOptions = 0;
   public mode?: string;
   public questionForm?: FormGroup;
   public currentQuestion?: Question;
+  private valueChangesSubscription?: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +40,17 @@ export class QuestionComponent implements OnInit {
         ? this.setNewQuestionForm()
         : this.setEditQuestionForm();
     });
+
+    this.valueChangesSubscription = this.questionForm
+      ?.get('type')
+      ?.valueChanges.subscribe((changes) => {
+        console.log('changes ', changes);
+        if (changes !== 'open' && this.answers.controls.length === 0) {
+          this.addOptionsSection();
+        } else if (changes === 'open') {
+          this.removeOptionsSection();
+        }
+      });
   }
 
   setNewQuestionForm(): void {
@@ -97,18 +110,21 @@ export class QuestionComponent implements OnInit {
     this.goToManagmentPage();
   }
 
-  onChange(e: MatRadioChange): void {
-    this.isAnswerOpen = e.value === 'open';
-    if (!this.isAnswerOpen && this.answers.controls.length === 0) {
-      [...Array(3)].forEach((i) => {
-        this.addAnswer();
-      });
-    } else if (this.isAnswerOpen) {
-      [...Array(this.numberOfOptions)].forEach((i) => this.removeAnswer(i));
-    }
+  addOptionsSection(): void {
+    [...Array(3)].forEach((i) => {
+      this.addAnswer();
+    });
+  }
+
+  removeOptionsSection(): void {
+    [...Array(this.numberOfOptions)].forEach((i) => this.removeAnswer(i));
   }
 
   goToManagmentPage(): void {
     this.router.navigate(['']);
+  }
+
+  ngOnDestroy() {
+    this.valueChangesSubscription?.unsubscribe();
   }
 }
